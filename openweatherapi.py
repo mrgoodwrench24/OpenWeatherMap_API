@@ -16,7 +16,7 @@ weather_response = requests.get(f'https://api.openweathermap.org/data/2.5/weathe
 
 current_weather = weather_response.json()
 
-#current_conditions = current_weather['weather']['weather.description']
+current_conditions = current_weather['weather'][0]['description']
 current_tempK = current_weather['main']['temp']
 current_tempC = current_tempK - 273.15
 current_tempf = (current_tempC * 9/5) + 32
@@ -27,7 +27,7 @@ tempf = float(current_tempf)
 ##print(response.json())       # Should print the response data in JSON format
 print("You entered: " + zip_code)
 print("Weather for " + city_name)
-#print(current_conditions)
+print(current_conditions)
 print(f"\nCurrent temperature: {round(tempf)}")
 
 
