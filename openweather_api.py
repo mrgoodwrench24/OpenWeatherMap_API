@@ -1,6 +1,7 @@
 import requests
+from config import api_key
 country_code = 'US'
-api_key = 'a240c5f32cbaeae4252cc8746d06634b&'
+
 
 def kelvin_to_fahrenheit(temp):
     #(K − 273.15) × 9/5 + 32 = °F.
