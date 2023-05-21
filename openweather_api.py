@@ -19,12 +19,12 @@ def get_city(zip_code):
         city_dict ={'lat': latitude, 'long': longitude, 'city' : city_name}
         return city_dict
     else:
-        raise Exception("Invalid Zip Code")
-                        #f"Error {zip_response.status_code}: {zip_response.text}
+        raise Exception("Invalid Zip Code")#f"Error {zip_response.status_code}: {zip_response.text}"
+
 
 def get_current_conditions(latitude, longitude):
     weather_response = requests.get(
-        f'https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}=')
+        f'https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}')
     if weather_response.status_code == 200:
         current_weather = weather_response.json()
         current_conditions = current_weather['weather'][0]['description']
@@ -41,7 +41,9 @@ def get_current_conditions(latitude, longitude):
         today_highK = current_weather['main']['temp_max']
         today_high = float(kelvin_to_fahrenheit(today_highK))
 
-        conditions_dict = {'current_temp' : current_tempf, 'conditions' : current_conditions, 'current_feel' : temp_feel, 'low': today_low, 'high' : today_high}
+        wind = current_weather['wind']['speed']
+
+        conditions_dict = {'current_temp' : current_tempf, 'conditions' : current_conditions, 'current_feel' : temp_feel, 'low': today_low, 'high' : today_high, 'wind_speed' : wind}
         return conditions_dict
     else:
         raise Exception(f"Error {weather_response.status_code}: {weather_response.text}")
